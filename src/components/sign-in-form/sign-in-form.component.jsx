@@ -6,6 +6,7 @@ import Button, { BUTTON_TYPE_CLASSES } from '../button/button.component';
 import {
   signInAuthUserWithEmailAndPassword,
   signInWithGooglePopup,
+  signInWithGoogleRedirect,
 } from '../../utils/firebase/firebase.utils';
 
 import { SignInContainer, ButtonsContainer } from './sign-in-form.styles';
@@ -24,7 +25,26 @@ const SignInForm = () => {
   };
 
   const signInWithGoogle = async () => {
-    await signInWithGooglePopup();
+    try {
+      console.log('Attempting Google sign-in...');
+      await signInWithGooglePopup();
+    } catch (error) {
+      console.error('Google popup sign-in failed:', error);
+      
+      // Fallback to redirect if popup fails
+      if (error.code === 'auth/popup-blocked' || error.code === 'auth/popup-closed-by-user') {
+        console.log('Falling back to redirect method...');
+        try {
+          await signInWithGoogleRedirect();
+        } catch (redirectError) {
+          console.error('Google redirect sign-in also failed:', redirectError);
+          alert('Google sign-in failed. Please try again or use email/password.');
+        }
+      } else {
+        console.error('Google sign-in error:', error.message);
+        alert(`Sign-in failed: ${error.message}`);
+      }
+    }
   };
 
   const handleSubmit = async (event) => {

@@ -6,6 +6,7 @@ import { Routes, Route } from "react-router-dom";
 import {
   onAuthStateChangedListener,
   createUserDocumentFromAuth,
+  getGoogleRedirectResult,
 } from "./utils/firebase/firebase.utils";
 import Home from "./routes/home/home.component";
 import Navigation from "./routes/navigation/navigation.component";
@@ -18,6 +19,21 @@ const App = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
+    // Handle redirect result on app load
+    const handleRedirectResult = async () => {
+      try {
+        const result = await getGoogleRedirectResult();
+        if (result && result.user) {
+          console.log('Google redirect sign-in successful:', result.user);
+          await createUserDocumentFromAuth(result.user);
+        }
+      } catch (error) {
+        console.error('Error handling redirect result:', error);
+      }
+    };
+
+    handleRedirectResult();
+
     const unsubscribe = onAuthStateChangedListener((user) => {
       if (user) {
         createUserDocumentFromAuth(user);
