@@ -24,11 +24,11 @@ const App = () => {
       try {
         const result = await getGoogleRedirectResult();
         if (result && result.user) {
-          console.log('Google redirect sign-in successful:', result.user);
+          console.log("Google redirect sign-in successful:", result.user);
           await createUserDocumentFromAuth(result.user);
         }
       } catch (error) {
-        console.error('Error handling redirect result:', error);
+        console.error("Error handling redirect result:", error);
       }
     };
 

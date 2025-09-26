@@ -22,12 +22,12 @@ import {
 } from "firebase/firestore";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyDDU4V-_QV3M8GyhC9SVieRTDM4dbiT0Yk",
-  authDomain: "crwn-clothing-db-98d4d.firebaseapp.com",
-  projectId: "crwn-clothing-db-98d4d",
-  storageBucket: "crwn-clothing-db-98d4d.appspot.com",
-  messagingSenderId: "626766232035",
-  appId: "1:626766232035:web:506621582dab103a4d08d6",
+  apiKey: "AIzaSyCZJKQP1Z8z2vhmflblTjmS1J3I3fDdNbs",
+  authDomain: "crown-clothing-db-19301.firebaseapp.com",
+  projectId: "crown-clothing-db-19301",
+  storageBucket: "crown-clothing-db-19301.firebasestorage.app",
+  messagingSenderId: "453433945294",
+  appId: "1:453433945294:web:f994549ab44ec63f6ab49f",
 };
 
 // Initialize Firebase
@@ -123,7 +123,7 @@ export const getGoogleRedirectResult = async () => {
     const result = await getRedirectResult(auth);
     return result;
   } catch (error) {
-    console.error('Error getting redirect result:', error);
+    console.error("Error getting redirect result:", error);
     throw error;
   }
 };
