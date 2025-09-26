@@ -43,3 +43,6 @@ yarn-error.log*
 
 # Backup files
 git-backup.txt
+
+# Local Netlify folder
+.netlify
